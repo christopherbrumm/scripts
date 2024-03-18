@@ -37,16 +37,11 @@ while true; do
         result=$(echo "$response" | jq -r '.result')
 
         # Execute another query using the extracted data
-        curl -X POST \
+        curl -s -X POST \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $CELESTIA_NODE_AUTH_TOKEN" \
-            -d '{
-                "id
-                "jsonrpc": "2.0",
-                "method": "share.GetEDS",
-                "params": ['$result']
-            }' \
-            127.0.0.1:26658
+            -d "{\"id\": 1, \"jsonrpc\": \"2.0\", \"method\": \"share.GetEDS\", \"params\": [ $(($result)) ] }" \
+            "127.0.0.1:$port"
     done
 
     ((counter++))
