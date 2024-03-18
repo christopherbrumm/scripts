@@ -34,7 +34,7 @@ while true; do
         echo "Executed header.GetByHeight"
 
         # Extract the header data from the previous request
-        result=$(echo "$response" | jq -r '.result')
+        result=$(jq -r '.result' <<< "$response")
 
         # Query EDS with extracted header
        edsResponse=$(curl -s -X POST \
