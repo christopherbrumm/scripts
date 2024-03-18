@@ -5,7 +5,7 @@ the submitted issue: https://github.com/celestiaorg/celestia-node/issues/3185
 ### Usage
 Please copy the file to your desired location and grant it executable permissions using the following command: 
 ```bash
-chmod +x load_test_celestia-node.sh
+chmod +x load_test_blob.sh
 ```
 
 Make sure to export `$CELESTIA_NODE_AUTH_TOKEN`.

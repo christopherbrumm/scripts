@@ -22,7 +22,7 @@ while true; do
 
     # Loop for each of the five requests
     for ((i=1; i<=5; i++)); do
-        request_number=$(( ($counter * 5) + $i ))  # Calculate request number
+        request_number=$(( ($counter * 5) + $i ))
         start_time=$(date +%s.%N)
         response=$(curl -s -X POST \
             -H "Content-Type: application/json" \
