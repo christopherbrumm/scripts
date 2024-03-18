@@ -31,17 +31,21 @@ while true; do
             "127.0.0.1:$port")
         end_time=$(date +%s.%N)
         duration=$(echo "$end_time - $start_time" | bc)
-        echo "Key: $key | Request: $i/5 | Duration: $duration seconds | Response: $response"
+        echo "Executed header.GetByHeight"
 
         # Extract the header data from the previous request
         result=$(echo "$response" | jq -r '.result')
 
-        # Execute another query using the extracted data
-        curl -s -X POST \
+        # Query EDS with extracted header
+       edsResponse=$(curl -s -X POST \
             -H "Content-Type: application/json" \
             -H "Authorization: Bearer $CELESTIA_NODE_AUTH_TOKEN" \
             -d "{\"id\": 1, \"jsonrpc\": \"2.0\", \"method\": \"share.GetEDS\", \"params\": [ $(($result)) ] }" \
-            "127.0.0.1:$port"
+            "127.0.0.1:$port")
+
+        end_time=$(date +%s.%N)
+        duration=$(echo "$end_time - $start_time" | bc)
+        echo "Key: $key | Request: $i/5 | Duration: $duration seconds | Response: $edsResponse"
     done
 
     ((counter++))
