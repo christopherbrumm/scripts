@@ -12,7 +12,7 @@ Make sure to export `$CELESTIA_NODE_AUTH_TOKEN`.
 
 Execute the file with the following parameters:
 ```bash
-./request_script.sh <port of celestia-node> 781000
+./load_test_blob.sh <port of celestia-node> 781000
 ```
 
 ### What is the script doing?
