@@ -7,7 +7,7 @@ if [ -z "$CELESTIA_NODE_AUTH_TOKEN" ]; then
 fi
 
 # Check if port and start_height are provided as arguments
-if [ "$#" -ne 3 ]; then
+if [ "$#" -ne 2 ]; then
     echo "Usage: $0 <port> <start_height>"
     exit 1
 fi
@@ -20,7 +20,7 @@ counter=0
 while true; do
     key=$(($start_height + $counter))
     start_time=$(date +%s.%N)
-    response=$(curl -X POST \
+    response=$(curl -s -X POST \
         -H "Content-Type: application/json" \
         -H "Authorization: Bearer $CELESTIA_NODE_AUTH_TOKEN" \
         -d "{\"id\": 1, \"jsonrpc\": \"2.0\", \"method\": \"header.GetByHeight\", \"params\": [ $(($key)) ] }" \
@@ -29,7 +29,7 @@ while true; do
 
     jq -r '.result' res.json > header.json
 
-    curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $CELESTIA_NODE_AUTH_TOKEN" -d '{
+    curl -s -X POST -H "Content-Type: application/json" -H "Authorization: Bearer $CELESTIA_NODE_AUTH_TOKEN" -d '{
         "id": 1,
         "jsonrpc": "2.0",
         "method": "share.GetEDS",
